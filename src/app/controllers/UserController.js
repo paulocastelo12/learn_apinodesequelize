@@ -54,6 +54,27 @@ class UserController {
       return res.status(400).json({ error: err.message });
     }
   }
+
+  async login(req, res) {
+    try {
+
+      const user = await User.findAll({
+        where: {
+          name: req.body['name'],
+          phone: req.body['phone']
+        }
+      });
+
+      if(!user[0]){
+        return res.status(400).json({ error: 'User not found!' });
+      } else{
+        return res.json(user);
+      }
+
+    } catch (err) {
+      return res.status(400).json({ error: err.message });
+    }
+  }
 }
 
 module.exports = new UserController();
