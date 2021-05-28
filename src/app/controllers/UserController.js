@@ -60,15 +60,15 @@ class UserController {
 
       const user = await User.findAll({
         where: {
-          name: req.body['name'],
-          phone: req.body['phone']
+          phone: req.body['phone'],
+          datebirthday: req.body['datebirthday']
         }
       });
 
       if(!user[0]){
         return res.status(400).json({ error: 'User not found!' });
       } else{
-        return res.json(user);
+        return res.json(user[0]);
       }
 
     } catch (err) {
